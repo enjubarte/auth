@@ -21,14 +21,14 @@ class UserController {
     @GetMapping("/{id}")
     fun findByID(@PathVariable("id") id: String) = userService.findById(UUID.fromString(id))
 
-    @GetMapping
+    @GetMapping("/search")
     fun findByEmail(@RequestParam("email") email: String) = userService.findByEmail(email)
 
     @GetMapping
     fun findAll() = userService.findAll()
 
     @PutMapping("/{id}")
-    fun update(@PathVariable("id") id: String,@RequestHeader("Authorization") token: String, @RequestBody userDTO: UserDTO) = userService.update(UUID.fromString(id), token, userDTO)
+    fun update(@PathVariable("id") id: String, @RequestHeader("Authorization") token: String, @RequestBody userDTO: UserDTO) = userService.update(UUID.fromString(id), token, userDTO)
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: String, @RequestHeader("Authorization") token: String) = userService.delete(UUID.fromString(id), token)

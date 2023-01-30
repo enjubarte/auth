@@ -4,9 +4,11 @@ package com.enjubarte.auth.service
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.enjubarte.auth.model.User
+import org.springframework.stereotype.Service
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+@Service
 class JWTService {
     private val secret: String = UUID.randomUUID().toString()
 

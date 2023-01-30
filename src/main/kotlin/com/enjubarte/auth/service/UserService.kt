@@ -21,7 +21,7 @@ class UserService: UserDetailsService{
         ResponseEntity(userRepository.findById(id).get(), HttpStatus.OK)
 
     fun findByEmail(email: String): ResponseEntity<User> =
-        ResponseEntity(userRepository.findUserByEmailOrNull(email), HttpStatus.OK)
+        ResponseEntity(userRepository.findByEmail(email), HttpStatus.OK)
 
     fun create(userDTO: UserDTO) = userRepository.save(userDTO.toUser())
 
@@ -39,8 +39,8 @@ class UserService: UserDetailsService{
        else ResponseEntity("USER NOT FOUND", HttpStatus.NOT_FOUND)
     }
 
-    fun userExists(userDTO: UserDTO) = userRepository.existByEmail(userDTO.email)
+    fun userExists(userDTO: UserDTO): Boolean = userRepository.findByEmail(userDTO.email) != null
 
     override fun loadUserByUsername(email: String?): User? =
-        email?.let { userRepository.findUserByEmailOrNull(it) }
+        email?.let { userRepository.findByEmail(it) }
 }
