@@ -3,7 +3,23 @@ package com.enjubarte.auth.mapper
 import com.enjubarte.auth.dto.UserDTO
 import com.enjubarte.auth.model.User
 import java.util.*
+import java.util.function.Function
 
-fun User.toDTO() = UserDTO(this.email,this.senha)
+class UserToDTO: Function<User, UserDTO>{
+    override fun apply(user: User): UserDTO {
+        return UserDTO(
+            user.email,
+            user.senha
+        )
+    }
+}
 
-fun UserDTO.toUser() = User(UUID.randomUUID(), this.email, this.senha)
+class UserDTOToUser: Function<UserDTO, User>{
+    override fun apply(user: UserDTO): User {
+        return User(
+            UUID.randomUUID(),
+            user.email,
+            user.senha
+        )
+    }
+}

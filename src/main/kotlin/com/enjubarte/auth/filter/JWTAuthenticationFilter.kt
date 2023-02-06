@@ -43,6 +43,5 @@ class JWTAuthenticationFilter: OncePerRequestFilter() {
             }
         }
 
-        filterChain.doFilter(request,response)
     }
 }

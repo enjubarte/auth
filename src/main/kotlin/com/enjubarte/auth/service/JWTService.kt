@@ -23,7 +23,7 @@ class JWTService {
         return UUID.fromString(JWT.decode(token.replace("Bearer ", "")).subject)
     }
 
-    private  fun isExpired(token: String): Boolean = JWT.decode(token).expiresAt.before(Date())
+    fun isExpired(token: String): Boolean = JWT.decode(token).expiresAt.before(Date())
 
     fun isValid(token: String, user: Optional<User>?): Boolean = getIdByToken(token) == user?.get()?.id && isExpired(token)
 

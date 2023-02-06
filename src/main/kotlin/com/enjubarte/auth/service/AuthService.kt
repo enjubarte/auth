@@ -1,7 +1,7 @@
 package com.enjubarte.auth.service
 
 import com.enjubarte.auth.dto.UserDTO
-import com.enjubarte.auth.mapper.toUser
+import com.enjubarte.auth.mapper.UserDTOToUser
 import com.enjubarte.auth.util.JWTResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -14,7 +14,7 @@ class AuthService {
 
 
     fun signIn(userDTO: UserDTO): ResponseEntity<Any> {
-        return ResponseEntity(JWTResponse(jwtService.generateToken(userDTO.toUser().id)), HttpStatus.OK)
+        return ResponseEntity(JWTResponse(jwtService.generateToken(UserDTOToUser().apply(userDTO).id)), HttpStatus.OK)
     }
 
     fun signUp(userDTO: UserDTO): ResponseEntity<Any>{
