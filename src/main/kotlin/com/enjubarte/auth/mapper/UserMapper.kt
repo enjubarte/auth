@@ -2,6 +2,7 @@ package com.enjubarte.auth.mapper
 
 import com.enjubarte.auth.dto.UserDTO
 import com.enjubarte.auth.model.User
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import java.util.*
 import java.util.function.Function
 
@@ -14,12 +15,12 @@ class UserToDTO: Function<User, UserDTO>{
     }
 }
 
-class UserDTOToUser: Function<UserDTO, User>{
-    override fun apply(user: UserDTO): User {
+class DTOToUser: Function<UserDTO, User>{
+    override fun apply(userDto: UserDTO): User {
         return User(
             UUID.randomUUID(),
-            user.email,
-            user.senha
+            userDto.email,
+            BCryptPasswordEncoder().encode(userDto.senha),
         )
     }
 }

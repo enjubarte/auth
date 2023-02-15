@@ -1,11 +1,16 @@
 package com.enjubarte.auth.dto
 
-import jakarta.annotation.Nonnull
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
 import java.io.Serializable
 
 data class UserDTO(
-    @Nonnull
+
+    @Email
+    @NotBlank(message = "Email Obrigatório!")
     val email: String,
-    @Nonnull
+
+    @NotBlank(message = "Senha Obrigatória!")
     val senha: String,
+
 ): Serializable

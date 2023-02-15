@@ -1,5 +1,5 @@
 package com.enjubarte.auth.model
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -11,6 +11,15 @@ import java.time.Instant
 import java.util.UUID
 
 @Entity(name = "tb_users")
+@JsonIgnoreProperties(
+    "enabled",
+    "authorities",
+    "password",
+    "username",
+    "accountNonExpired",
+    "accountNonLocked",
+    "credentialsNonExpired"
+)
 data class User(
     @Id
     @GeneratedValue
@@ -26,6 +35,7 @@ data class User(
     val updateAt: Instant = Instant.now()
 
 ): UserDetails {
+
     override fun getAuthorities(): MutableCollection<out GrantedAuthority>  = mutableListOf()
     override fun getPassword(): String = senha
     override fun getUsername(): String = email
@@ -33,7 +43,6 @@ data class User(
     override fun isAccountNonLocked(): Boolean = true
     override fun isCredentialsNonExpired(): Boolean = true
     override fun isEnabled(): Boolean = true
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
@@ -41,10 +50,8 @@ data class User(
 
         return id == other.id
     }
-
     override fun hashCode(): Int = javaClass.hashCode()
-
     @Override
     override fun toString(): String =
-        this::class.simpleName + "(id = $id , email = $email , password = $password , createAt = $createAt , updateAt = $updateAt )"
+        this::class.simpleName + "(id = $id , email = $email , senha = $senha , createAt = $createAt , updateAt = $updateAt )"
 }

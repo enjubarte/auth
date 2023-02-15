@@ -2,7 +2,6 @@ package com.enjubarte.auth.controller
 
 import com.enjubarte.auth.dto.UserDTO
 import com.enjubarte.auth.service.UserService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1/users")
 class UserController(private val userService: UserService) {
 
     @GetMapping("/{id}")

@@ -23,7 +23,7 @@ class JWTAuthenticationFilter: OncePerRequestFilter() {
     ) {
         val header: String? = request.getHeader("Authorization")
 
-        if (header == null || !header.startsWith("Bearer ") )
+        if (header == null || !header.startsWith("Bearer "))
             filterChain.doFilter(request,response)
 
         val token = header?.substring(7)
@@ -42,6 +42,5 @@ class JWTAuthenticationFilter: OncePerRequestFilter() {
                 filterChain.doFilter(request, response)
             }
         }
-
     }
 }
